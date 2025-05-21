@@ -28,18 +28,13 @@ The application connects to the following API:
 
 ## Building and Running the Application
 
-### Clone the Repository
 
-\`\`\`bash
-git clone https://github.com/yourusername/nit3213-android-app.git
-cd nit3213-android-app
-\`\`\`
 
 ### Open in Android Studio
 
 1. Launch Android Studio
-2. Select "Open an Existing Project"
-3. Navigate to the cloned repository and click "Open"
+2. Select "New Project" from version control
+3. Copy this link and paste it into "https://github.com/Vansh25080/FinalAssessment" and click "Clone"
 4. Wait for the Gradle sync to complete
 
 
@@ -51,8 +46,8 @@ cd nit3213-android-app
 
 ### Login Credentials
 
-- Username: Your first name
-- Password: Your student ID (format: s12345678)
+- Username: Vansh
+- Password:s8094526
 
 
 ## Features
