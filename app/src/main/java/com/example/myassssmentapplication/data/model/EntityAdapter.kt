@@ -25,13 +25,9 @@ class EntityAdapter(
 
     override fun onBindViewHolder(holder: EntityViewHolder, position: Int) {
         val entity = entityList[position]
-        holder.tvProp1.text = entity.property1 ?: "N/A"
-        holder.tvProp2.text = entity.property2 ?: "N/A"
-        // Log debug information to check data binding.
-        android.util.Log.d(
-            "EntityAdapter",
-            "Binding entity at position $position with property1: ${entity.property1} and property2: ${entity.property2}"
-        )
+        // Display assetType and ticker values
+        holder.tvProp1.text = entity.assetType ?: "N/A"
+        holder.tvProp2.text = entity.ticker ?: "N/A"
         holder.itemView.setOnClickListener {
             onItemClick(entity)
         }
@@ -39,9 +35,7 @@ class EntityAdapter(
 
     override fun getItemCount(): Int = entityList.size
 
-    // Update adapter's dataset and refresh the list
     fun updateData(newEntities: List<Entity>) {
-        android.util.Log.d("EntityAdapter", "Updating data with ${newEntities.size} entities")
         entityList = newEntities
         notifyDataSetChanged()
     }

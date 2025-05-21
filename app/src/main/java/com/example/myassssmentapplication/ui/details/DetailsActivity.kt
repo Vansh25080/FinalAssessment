@@ -3,8 +3,8 @@ package com.example.myassssmentapplication.ui.details
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myassssmentapplication.data.model.Entity
 import com.example.myassssmentapplication.R
+import com.example.myassssmentapplication.data.model.Entity
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -20,13 +20,14 @@ class DetailsActivity : AppCompatActivity() {
         val tvProp2 = findViewById<TextView>(R.id.tvProp2)
         val tvDescription = findViewById<TextView>(R.id.tvDescription)
 
-        // Receive entity from intent
         val entity = intent.getSerializableExtra(EXTRA_ENTITY) as? Entity
 
         entity?.let {
-            tvProp1.text = it.property1
-            tvProp2.text = it.property2
-            tvDescription.text = it.description
+            tvProp1.text = "Asset Type: ${it.assetType ?: "N/A"}"
+            tvProp2.text = "Ticker: ${it.ticker ?: "N/A"}"
+            tvDescription.text = "Description: ${it.description ?: "N/A"}\n\n" +
+                    "Current Price: ${it.currentPrice ?: "N/A"}\n\n" +
+                    "Dividend Yield: ${it.dividendYield ?: "N/A"}"
         }
     }
 }

@@ -4,11 +4,17 @@ import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class Entity(
-    @SerializedName("property1")
-    val property1: String?,
+    @SerializedName("assetType")
+    val assetType: String?,
 
-    @SerializedName("property2")
-    val property2: String?,
+    @SerializedName("ticker")
+    val ticker: String?,
+
+    @SerializedName("currentPrice")
+    val currentPrice: Double?,
+
+    @SerializedName("dividendYield")
+    val dividendYield: Double?,
 
     @SerializedName("description")
     val description: String?
