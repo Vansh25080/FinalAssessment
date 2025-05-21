@@ -30,10 +30,10 @@ The application connects to the following API:
 
 ### Clone the Repository
 
-\`\`\`bash
-git clone https://github.com/yourusername/nit3213-android-app.git
-cd nit3213-android-app
-\`\`\`
+
+git clone https://github.com/Vansh25080/FinalAssessment/tree/master
+cd FinalAssessment
+
 
 ### Open in Android Studio
 
