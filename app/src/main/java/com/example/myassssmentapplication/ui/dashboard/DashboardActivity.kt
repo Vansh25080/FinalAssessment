@@ -14,6 +14,7 @@ import com.example.myassssmentapplication.data.model.DashboardResponse
 import com.example.myassssmentapplication.data.model.Entity
 import com.example.myassssmentapplication.data.model.EntityAdapter
 import com.example.myassssmentapplication.ui.details.DetailsActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +24,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvEntityTotal: TextView
     private lateinit var entityAdapter: EntityAdapter
+    private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,18 +33,36 @@ class DashboardActivity : AppCompatActivity() {
         // Initialize views
         recyclerView = findViewById(R.id.recyclerView)
         tvEntityTotal = findViewById(R.id.tvEntityTotal)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
 
-        // Set layout manager and attach an empty adapter to avoid layout issues
+        // Set up RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
         entityAdapter = EntityAdapter(emptyList()) { selectedEntity ->
-            // On item click, navigate to DetailsActivity
             val intent = Intent(this, DetailsActivity::class.java)
             intent.putExtra(DetailsActivity.EXTRA_ENTITY, selectedEntity)
             startActivity(intent)
         }
         recyclerView.adapter = entityAdapter
 
-        // Get keypass from intent
+        // Bottom Navigation Bar item click handler
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_dashboard -> {
+                    // Already on Dashboard: show a short toast message.
+                    Toast.makeText(this, "Already on Dashboard", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.nav_details -> {
+                    // Navigates to DetailsActivity (you could enhance this to pass necessary data)
+                    val intent = Intent(this, DetailsActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Retrieve API 'keypass' from intent
         val keypass = intent.getStringExtra("keypass")
         Log.d("DashboardDebug", "Keypass received: $keypass")
         if (keypass.isNullOrEmpty()) {
@@ -51,7 +71,7 @@ class DashboardActivity : AppCompatActivity() {
             return
         }
 
-        // Now attempt to fetch data
+        // Fetch data from API
         fetchDashboardData(keypass)
     }
 
@@ -67,8 +87,8 @@ class DashboardActivity : AppCompatActivity() {
                         tvEntityTotal.text = "Total Entities: ${dashboardData.entityTotal}"
                         updateRecyclerView(dashboardData.entities)
                     } else {
-                        Log.w("DashboardDebug", "No entities available or data is null")
                         Toast.makeText(this@DashboardActivity, "No entities available", Toast.LENGTH_SHORT).show()
+                        Log.w("DashboardDebug", "Empty or null data received")
                     }
                 } else {
                     val errorBody = response.errorBody()?.string()
