@@ -1,13 +1,14 @@
-package com.example.myassssmentapplication
+package com.example.myassssmentapplication.data.model
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myassssmentapplication.R
 
 class EntityAdapter(
-    private val entityList: List<Entity>,
+    private var entityList: List<Entity>,
     private val onItemClick: (Entity) -> Unit
 ) : RecyclerView.Adapter<EntityAdapter.EntityViewHolder>() {
 
@@ -24,13 +25,24 @@ class EntityAdapter(
 
     override fun onBindViewHolder(holder: EntityViewHolder, position: Int) {
         val entity = entityList[position]
-        holder.tvProp1.text = entity.property1
-        holder.tvProp2.text = entity.property2
-
+        holder.tvProp1.text = entity.property1 ?: "N/A"
+        holder.tvProp2.text = entity.property2 ?: "N/A"
+        // Log debug information to check data binding.
+        android.util.Log.d(
+            "EntityAdapter",
+            "Binding entity at position $position with property1: ${entity.property1} and property2: ${entity.property2}"
+        )
         holder.itemView.setOnClickListener {
             onItemClick(entity)
         }
     }
 
     override fun getItemCount(): Int = entityList.size
+
+    // Update adapter's dataset and refresh the list
+    fun updateData(newEntities: List<Entity>) {
+        android.util.Log.d("EntityAdapter", "Updating data with ${newEntities.size} entities")
+        entityList = newEntities
+        notifyDataSetChanged()
+    }
 }

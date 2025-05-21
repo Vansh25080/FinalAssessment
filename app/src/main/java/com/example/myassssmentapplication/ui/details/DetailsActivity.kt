@@ -1,8 +1,10 @@
-package com.example.myassssmentapplication
+package com.example.myassssmentapplication.ui.details
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myassssmentapplication.data.model.Entity
+import com.example.myassssmentapplication.R
 
 class DetailsActivity : AppCompatActivity() {
 

@@ -1,5 +1,8 @@
-package com.example.myassssmentapplication
+package com.example.myassssmentapplication.data.api
 
+import com.example.myassssmentapplication.data.model.DashboardResponse
+import com.example.myassssmentapplication.data.model.LoginRequest
+import com.example.myassssmentapplication.data.model.LoginResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
